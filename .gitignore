@@ -1,43 +1,53 @@
 ```gitignore
-# General Python and OS files
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.DS_Store
-Thumbs.db
+  # Python
+  __pycache__/
+  *.pyc
+  *.pyo
+  *.pyd
+  *.egg-info/
+  dist/
+  build/
 
-# Virtual environment folders
-venv/
-env/
-.env
-.venv
+  # Virtual environment folders
+  venv/
+  env/
+  .env
+  .venv
 
-# IDE-specific folders
-.idea/
-.vscode/
+  # IDE specific
+  .idea/
+  .vscode/
+  *.suo
+  *.ntvs*
+  *.njsproj
+  *.sln
+  *.sw?
 
-# Log files (if your scripts create .log files in the root or specific log folders you want to ignore)
-*.log
+  # Log files (general)
+  *.log
+  logs/
+  *.log.*
 
-# Output directories from your main scraping scripts
-All_Seasons_Match_Results_Output/
-Career_Averages_Output/
-Innings_By_Innings_output/
-Team_code_output/
-batting_bowling_stat_output/
+  # Output directories from your main scraping scripts
+  All_Seasons_Match_Results_Output/
+  Career_Averages_Output/
+  Innings_By_Innings_output/
+  Team_code_output/
+  batting_bowling_stat_output/
 
-# Output directories from your season-specific scorecard scripts
-# This pattern will match "2007-08_Scorecard/", "2009_Scorecard/", etc.
-# located anywhere in the project (so it covers them inside Match_Scorecard/)
-*_Scorecard/
+  # Output directories from your season-specific scorecard scripts
+  # This targets the nested output structure like "Match_Scorecard/2023_Scorecard/"
+  Match_Scorecard/*_Scorecard/
 
-# If your season-specific scripts also generate .csv files directly in their own folder
-# and you want to ignore those (but NOT the .py scripts), this is trickier with
-# broad patterns. For now, focusing on the output folders is safer.
-# If CSVs are *only* inside *_scorecard_data/ then the *_Scorecard/ entry above will cover it.
+  # If any script directly outputs CSVs to Match_Scorecard that are NOT .py files
+  # and you want to commit .py files in Match_Scorecard but ignore CSVs there:
+  # Match_Scorecard/*.csv
 
-# To be very specific for the nested structure shown in your git status for CSVs:
-# Match_Scorecard/*_Scorecard/*_scorecard_data/*.csv
-# However, ignoring the parent *_Scorecard/ directory is usually sufficient and cleaner.
-```
+  # Jupyter Notebook checkpoints
+  .ipynb_checkpoints/
+
+  # Other common OS files
+  .DS_Store
+  Thumbs.db
+  ```
+  **Important:** The line `Match_Scorecard/*_Scorecard/` is designed to ignore folders like `Match_Scorecard/2016_Scorecard/`, `Match_Scorecard/2017_Scorecard/`, etc., which seem to contain your *output data* based on your previous `git status` output. The folder `Match_Scorecard/` itself, which contains your `.py` scripts, will *not* be ignored by this rule.
