@@ -1,53 +1,19 @@
-```gitignore
-  # Python
-  __pycache__/
-  *.pyc
-  *.pyo
-  *.pyd
-  *.egg-info/
-  dist/
-  build/
+# ... (keep your other ignore rules for __pycache__, venv, .DS_Store, etc.) ...
 
-  # Virtual environment folders
-  venv/
-  env/
-  .env
-  .venv
+# Output directories from your main scraping scripts
+All_Seasons_Match_Results_Output/
+Career_Averages_Output/
+Innings_By_Innings_output/
+Team_code_output/
+batting_bowling_stat_output/
 
-  # IDE specific
-  .idea/
-  .vscode/
-  *.suo
-  *.ntvs*
-  *.njsproj
-  *.sln
-  *.sw?
+# Output directories and files from your season-specific scorecard scripts
+# This should ignore the entire SEASON_Scorecard directory and all its contents
+Match_Scorecard/*_Scorecard/
 
-  # Log files (general)
-  *.log
-  logs/
-  *.log.*
-
-  # Output directories from your main scraping scripts
-  All_Seasons_Match_Results_Output/
-  Career_Averages_Output/
-  Innings_By_Innings_output/
-  Team_code_output/
-  batting_bowling_stat_output/
-
-  # Output directories from your season-specific scorecard scripts
-  # This targets the nested output structure like "Match_Scorecard/2023_Scorecard/"
-  Match_Scorecard/*_Scorecard/
-
-  # If any script directly outputs CSVs to Match_Scorecard that are NOT .py files
-  # and you want to commit .py files in Match_Scorecard but ignore CSVs there:
-  # Match_Scorecard/*.csv
-
-  # Jupyter Notebook checkpoints
-  .ipynb_checkpoints/
-
-  # Other common OS files
-  .DS_Store
-  Thumbs.db
-  ```
-  **Important:** The line `Match_Scorecard/*_Scorecard/` is designed to ignore folders like `Match_Scorecard/2016_Scorecard/`, `Match_Scorecard/2017_Scorecard/`, etc., which seem to contain your *output data* based on your previous `git status` output. The folder `Match_Scorecard/` itself, which contains your `.py` scripts, will *not* be ignored by this rule.
+# If the above isn't specific enough, or if files are sometimes outside those folders,
+# you can add more specific patterns. But the above *should* work.
+# For example, to explicitly ignore all .csv and .log files within any subdirectory of Match_Scorecard:
+# Match_Scorecard/**/*.csv
+# Match_Scorecard/**/*.log
+# However, ignoring the parent output folder (like *_Scorecard/) is usually cleaner.
